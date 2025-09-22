@@ -5,7 +5,7 @@
 using namespace cv;
 using namespace std;
 
-// Simple histogram renderer (values -> bar plot as an image)
+// ----------------- Simple histogram renderer (values -> bar plot as an image) -----------------
 Mat plotHistogram(const vector<float>& vals, int bins = 30, Size canvas = Size(640, 400)) {
     Mat plot(canvas, CV_8UC3, Scalar(255, 255, 255));
     if (vals.empty() || bins < 1) return plot;
@@ -79,6 +79,7 @@ static void computeWarpedCanvas(const Mat& img1, const Mat& img2, const Mat& H12
     T21 = (Mat_<double>(3, 3) << 1, 0, tx, 0, 1, ty, 0, 0, 1);
 }
 
+// ----------------- Blendning Overlay function -----------------
 static Mat blendOverlay(const Mat& warped1, const Mat& img2_on_canvas,
     const Mat& mask1_255, const Mat& /*mask2_255*/) {
     Mat pano = img2_on_canvas.clone();
@@ -86,7 +87,7 @@ static Mat blendOverlay(const Mat& warped1, const Mat& img2_on_canvas,
     return pano;
 }
 
-// Feathering with proper binary masks for distanceTransform
+// ----------------- Feathering with proper binary masks for distanceTransform -----------------
 static Mat blendFeather(const Mat& warped1, const Mat& img2_on_canvas,
     const Mat& mask1_255, const Mat& mask2_255) {
     // Convert 255 masks to 0/1 (CV_8U) for distanceTransform
@@ -146,6 +147,7 @@ static Mat blendFeather(const Mat& warped1, const Mat& img2_on_canvas,
     return pano;
 }
 
+// ----------------- Function for building Panorams using Overlay and Feather blanding -----------------
 static void buildPanoramas(const Mat& img1_color, const Mat& img2_color, const Mat& H12,
     const string& outOverlay, const string& outFeather) {
     Size canvasSize; Mat T;
@@ -177,6 +179,7 @@ static void buildPanoramas(const Mat& img1_color, const Mat& img2_color, const M
     imwrite(outFeather, pano_feather);
 }
 
+// ----------------- Feature Matching using SIFT and saving the picture -----------------
 size_t matchAndSaveSIFT_BF(const string& img1Path, const string& img2Path, const string& outPath, float ratio = 0.75f) {
     Mat img1 = imread(img1Path, IMREAD_GRAYSCALE);
     Mat img2 = imread(img2Path, IMREAD_GRAYSCALE);
@@ -333,7 +336,7 @@ size_t matchAndSaveSIFT_BF(const string& img1Path, const string& img2Path, const
     return (!inliers.empty() ? inliers.size() : good.size()); 
 }
 
-
+// ----------------- Feature Matching using ORB and saving the picture -----------------
 size_t matchAndSaveORB_BF(const string& img1Path, const string& img2Path, const string& outPath, float ratio = 0.75f) {
     Mat img1 = imread(img1Path, IMREAD_GRAYSCALE);
     Mat img2 = imread(img2Path, IMREAD_GRAYSCALE);
