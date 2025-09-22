@@ -443,11 +443,15 @@ size_t matchAndSaveORB_BF(const string& img1Path, const string& img2Path, const 
 
 int main() {
 
-    //size_t goodCount = matchAndSaveSIFT_BF("in2.png", "in1.png", "sift_matches.jpg");
+    // ----------------- SET 1 ----------------- 
+
+    size_t goodCount = matchAndSaveSIFT_BF("in2.png", "in1.png", "sift_matches.jpg");
+    cout << "Good matches: " << goodCount << "\n";
+
+    //goodCount = matchAndSaveSIFT_BF("pic11.png", "pic22.png", "sift_matches_pic11_22.jpg");
     //cout << "Good matches: " << goodCount << "\n";
 
-    size_t goodCount = matchAndSaveSIFT_BF("pic11.png", "pic22.png", "sift_matches_pic11_22.jpg");
-    cout << "Good matches: " << goodCount << "\n";
+    // ----------------- SET 2 ----------------- 
 
     //size_t orbGood = matchAndSaveORB_BF("in2.png", "in1.png", "orb_matches.jpg");
     //cout << "ORB good matches: " << orbGood << "\n";
@@ -455,6 +459,15 @@ int main() {
     //size_t orbGood = matchAndSaveORB_BF("pic11.png", "pic22.png", "orb_matches_pic11_22.jpg");
     //cout << "ORB good matches: " << orbGood << "\n";
     
+    // ----------------- SET 3 ----------------- 
+
+    //size_t goodCount = matchAndSaveSIFT_BF("home1.png", "home2.png", "sift_matches_home.jpg");
+    //cout << "Good matches: " << goodCount << "\n";
+
+    //size_t orbGood = matchAndSaveORB_BF("home2.png", "home1.png", "orb_matches_home.jpg");
+    //cout << "ORB good matches: " << orbGood << "\n";
+
+
     return 0;
 
 }
